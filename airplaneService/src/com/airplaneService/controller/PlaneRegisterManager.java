@@ -35,9 +35,17 @@ public class PlaneRegisterManager {
 		String name = sc.nextLine();
 		System.out.println("좌석의 행 개수를 입력해주세요: ");
 		int rowX = Integer.parseInt(sc.nextLine());
-		System.out.println("좌석의 열 개수를 입력해주세요: ");
-		int colY = Integer.parseInt(sc.nextLine());
-
+		
+		int colY;
+		do {
+			System.out.print("좌석의 열 개수를 입력해주세요(짝수만 가능): ");
+			colY = Integer.parseInt(sc.nextLine());
+			if (colY % 2 != 0) {
+				System.out.println("좌석의 열 개수는 짝수여야 합니다 다시입력하세요. ");
+			}
+			
+		} while (colY % 2 != 0);
+		
 		PlaneVO plane = new PlaneVO(null, name, rowX, colY, 0);
 		boolean successFlag = planeDAO.insertPlaneDB(plane);
 		System.out.println((successFlag) ? "입력 성공" : "입력 실패");
@@ -59,8 +67,15 @@ public class PlaneRegisterManager {
 		String name = sc.nextLine();
 		System.out.println("수정할 좌석의 행 개수를 입력해주세요: ");
 		int rowX = Integer.parseInt(sc.nextLine());
-		System.out.println("수정할 좌석의 열 개수를 입력해주세요: ");
-		int colY = Integer.parseInt(sc.nextLine());
+		int colY;
+		do {
+			System.out.print("수정할 좌석의 열 개수를 입력해주세요(짝수만 가능): ");
+			colY = Integer.parseInt(sc.nextLine());
+			if (colY % 2 != 0) {
+				System.out.println("좌석의 열 개수는 짝수여야 합니다 다시입력하세요. ");
+			}
+			
+		} while (colY % 2 != 0);
 
 		existingPlane.setName(name);
 		existingPlane.setRowX(rowX);
